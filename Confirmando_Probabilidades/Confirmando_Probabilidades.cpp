@@ -1,17 +1,19 @@
 #include <iostream> // Trabalho feito por Gustavo Coelho e João Vitor Custódio na disciplina de Algoritmos e Programação II
 #include <time.h>
 
-int const num_lados = 5; // Não fizemos a leitura do número de lados pois não é permitida a alocação dinâmica do vetor
+int const num_lados = 6; // Não fizemos a leitura do número de lados pois não é permitida a alocação dinâmica do vetor
 
-void leitura(int &numRepet);
-void contar(int numRepet, int lados[]);
+// Cabeçalho
 int menu();
+void leitura(int &numRepet);
+void contar(int numRepet, float lados[]);
+void escreva(int numRepet, float lados[]);
 
 int main()
 {
     srand(time(NULL));
 
-    int lados[num_lados] = { 0 };
+    float lados[num_lados] = { 0 };
     int numRepet = 0;
 
     switch (menu())
@@ -21,16 +23,17 @@ int main()
         
         leitura(numRepet);
         contar(numRepet, lados);
+        escreva(numRepet, lados);
         break;
     
     case 2:
         
-        std::cout << "deu 2";
+        std::cout << "em obras";
         break;
     
     case 3:
         
-        std::cout << "deu 3";
+        std::cout << "em obras";
         break;
     
     default:
@@ -60,12 +63,28 @@ void leitura(int &numRepet) {
     return;
 }
 
-void contar(int numRepet, int lados[]) {
+void contar(int numRepet, float lados[]) {
     
+    int valor = 0;
     for (int i = 0; i < numRepet; i++) {
         
-        int valor = rand() % num_lados + 1;
+        valor = rand() % num_lados + 1;
         lados[valor - 1] ++;
+    }
+    return;
+}
+
+void escreva(int numRepet, float lados[]) {
+    
+    for (int i = 0; i < num_lados; i++) {
+        std::cout << i + 1 << ": " << lados[i] << "\t";
+    }
+    
+    std::cout << "\n\nDistrib.:\n\n";
+    std::cout.precision(3);
+    
+    for (int i = 0; i < num_lados; i++) {
+        std::cout << i + 1 << " = " << lados[i] / numRepet * 100 << "%\n";
     }
     return;
 }
